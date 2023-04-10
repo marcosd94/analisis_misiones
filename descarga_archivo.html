@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
+    <title>Descargar archivos</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="rtm_ts_favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  
+  
+    
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+	<script type="text/javascript" src="descarga_archivo.js"></script> 
+	<script src="http://malsup.github.io/jquery.blockUI.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    
+	<script src="http://malsup.github.io/jquery.blockUI.js"></script>
+  
+
+
+	<style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      
+      #map {
+        height: 100%;
+      }
+
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+	  .list-group{
+		max-height: 500px;
+		margin-bottom: 10px;
+		overflow-y:auto;
+		-webkit-overflow-scrolling: touch;
+	}
+	.list-group-item-action:active {
+		color: #212529;
+		background-color: #adb5bd7d;
+	}
+	.seleccionado {
+		color: #212529 !important;
+		background-color: #adb5bd7d !important;
+	}
+    </style>
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Mar 09 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body style="overflow-y: hidden;">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="rtm_ts.png" alt="">
+        <span class="d-none d-lg-block">Route to Market & Tech Sales</span>
+      </a>
+    </div><!-- End Logo -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+  
+  <div class="row">
+        <div>
+          <h3>Análisis de Misiones</h3>
+        </div>
+		<form">
+		  <img class="mb-4" src="bootstrap-solid.png" alt="" width="72" height="72">
+		  <h1 class="h3 mb-3 font-weight-normal">Ingrese el archivo y espere la descarga</h1>
+		  <label for="vendedores_clientes" class="sr-only">Misiones</label>
+		  <input type="file" id="vendedores_clientes" class="form-control">
+		  
+		</form>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+		<div class="card info-card sales-card" style="padding: 16px;">
+	<table class="table" style="font-size:14px;" id="tabla_misiones">
+	  <thead>
+		<tr>
+		  <th scope="col">#</th>
+		  <th scope="col">Id. Vendedor</th>
+		  <th scope="col">Vendedor</th>
+		  <th scope="col">Id Cliente</th>
+		  <th scope="col">Razón Social</th>
+		  <th scope="col">Fecha Resolución</th>
+		  <th scope="col" class="text-center">Foto Resolución</th>
+		</tr>
+	  </thead>
+	  <tbody id="body_misiones">
+	  </tbody>
+	</table>
+	
+  <div class="row" style="margin: 0 auto;">
+	<nav aria-label="Page navigation example" class="pagination_nav" id="pagination_nav">
+	  <ul class="pagination" id="pagination" style="margin-bottom: 0.5rem;">
+		<li class="page-item">
+		  <a class="page-link" href="#" aria-label="Previous" id="prev" disabled="true">
+			<span aria-hidden="true">&laquo;</span>
+			<span class="sr-only">Previous</span>
+		  </a>
+		</li>
+		<li class="page-item"><a class="page-link ventas_pagination" at="1" href="#">1</a></li>
+		<li class="page-item"><a class="page-link ventas_pagination" at="2" href="#">2</a></li>
+		<li class="page-item"><a class="page-link ventas_pagination" at="3" href="#">3</a></li>
+		<li class="page-item">
+		  <a class="page-link" href="#" aria-label="Next" id="next">
+			<span aria-hidden="true">&raquo;</span>
+			<span class="sr-only">Next</span>
+		  </a>
+		</li>
+	  </ul>
+</nav>
+  </div>
+	  </div>
+
+  </main><!-- End #main -->
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+
+  <!-- Template Main JS File
+  <script src="assets/js/main.js"></script> -->
+
+</body>
+
+</html>
+<div id="image_modals"></div>
+
