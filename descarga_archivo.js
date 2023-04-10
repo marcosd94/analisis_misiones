@@ -99,7 +99,7 @@ function filePickedVendedores(oEvent) {
 	if(typeof oEvent == 'undefined' ){
 		return;
 	}
-	$.blockUI({ message: '<h2><img src="css/busy.gif" /> Leyendo archivo...</h2>' }); 
+	//$.blockUI({ message: '<h2><img src="css/busy.gif" /> Leyendo archivo...</h2>' }); 
 	var oFile = oEvent.target.files[0];
 	var sFilename = oFile.name;
 	var reader = new FileReader();
@@ -124,7 +124,7 @@ function filePickedVendedores(oEvent) {
 				this.misiones_filtradas.push(misiones[i]);
 			}			
 		}
-		$.unblockUI();
+		//$.unblockUI();
 		var salto = 0;
 		pag+= '<ul class="pagination text-center" id="pagination" style="margin-bottom: 0.5rem;"><li class="page-item"><a class="page-link" href="#" aria-label="Previous" id="prev"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>';
 		for(var j = 1; j < Math.ceil((misiones_finalizadas/this.cantidad)); j++){
